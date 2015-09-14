@@ -35,16 +35,25 @@
   <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
 
 
-<meta name="description" content="Knowing info of current activity12345678public class BaseActivity extends Activity &amp;#123;	private final String TAG = getClass().getSimpleName();	@Override	protected void onCreate(Bundle savedInstanceS">
+<meta name="description" content="在对应的activity中,重载函数onConfigurationChanged1234@Overridepublic voidonConfigurationChanged(Configuration newConfig) &amp;#123;    super.onConfigurationChanged(newConfig);&amp;#125;
+在该函数中可以通过两种方法检测当前的屏幕状态：
+
+判断newC">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android Better Practice : Activity">
-<meta property="og:url" content="http://llin233.github.io/2015/09/06/Android-Better-Practice-Activity/index.html">
+<meta property="og:title" content="How to check orientation of your Android device in real time">
+<meta property="og:url" content="http://llin233.github.io/2015/09/14/Android-Check-Device-Orientation-In-Real-Time/index.html">
 <meta property="og:site_name" content="Muya's Codepath">
-<meta property="og:description" content="Knowing info of current activity12345678public class BaseActivity extends Activity &amp;#123;	private final String TAG = getClass().getSimpleName();	@Override	protected void onCreate(Bundle savedInstanceS">
-<meta property="og:updated_time" content="2015-09-06T22:12:42.123Z">
+<meta property="og:description" content="在对应的activity中,重载函数onConfigurationChanged1234@Overridepublic voidonConfigurationChanged(Configuration newConfig) &amp;#123;    super.onConfigurationChanged(newConfig);&amp;#125;
+在该函数中可以通过两种方法检测当前的屏幕状态：
+
+判断newC">
+<meta property="og:updated_time" content="2015-09-14T19:59:43.478Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android Better Practice : Activity">
-<meta name="twitter:description" content="Knowing info of current activity12345678public class BaseActivity extends Activity &amp;#123;	private final String TAG = getClass().getSimpleName();	@Override	protected void onCreate(Bundle savedInstanceS">
+<meta name="twitter:title" content="How to check orientation of your Android device in real time">
+<meta name="twitter:description" content="在对应的activity中,重载函数onConfigurationChanged1234@Overridepublic voidonConfigurationChanged(Configuration newConfig) &amp;#123;    super.onConfigurationChanged(newConfig);&amp;#125;
+在该函数中可以通过两种方法检测当前的屏幕状态：
+
+判断newC">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -54,7 +63,7 @@
   };
 </script>
 
-  <title> Android Better Practice : Activity | Muya's Codepath </title>
+  <title> How to check orientation of your Android device in real time | Muya's Codepath </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -153,7 +162,7 @@
           
           
             
-              Android Better Practice : Activity
+              How to check orientation of your Android device in real time
             
           
         </h1>
@@ -162,8 +171,8 @@
       <div class="post-meta">
         <span class="post-time">
           发表于
-          <time itemprop="dateCreated" datetime="2015-09-06T01:47:45-07:00" content="2015-09-06">
-            2015-09-06
+          <time itemprop="dateCreated" datetime="2015-09-14T12:45:12-07:00" content="2015-09-14">
+            2015-09-14
           </time>
         </span>
 
@@ -181,11 +190,31 @@
       
 
       
-        <span itemprop="articleBody"><h1 id="Knowing_info_of_current_activity">Knowing info of current activity</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BaseActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">final</span> String TAG = getClass().getSimpleName();</span><br><span class="line">	<span class="annotation">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">		Log.d(<span class="string">"BaseActivity"</span>,  TAG);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="Finish_all_activities">Finish all activities</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ActivityCollector</span> </span>&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> List&lt;Activity&gt; activities = <span class="keyword">new</span> ArrayList&lt;Activity&gt;();</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">addActivity</span><span class="params">(Activity activity)</span> </span>&#123;</span><br><span class="line">		activities.add(activity);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">removeActivity</span><span class="params">(Activity activity)</span> </span>&#123;</span><br><span class="line">		activities.remove(activity);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">finishAll</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">for</span> (Activity activity : activities) &#123;</span><br><span class="line">			<span class="keyword">if</span> (!activity.isFinishing()) &#123;</span><br><span class="line">				activity.finish();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BaseActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</span><br><span class="line">	<span class="annotation">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">		Log.d(TAG, <span class="string">"Msg"</span>);</span><br><span class="line">		ActivityCollector.addActivity(<span class="keyword">this</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="annotation">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>.onDestroy();</span><br><span class="line">		ActivityCollector.removeActivity(<span class="keyword">this</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThirdActivity</span> <span class="keyword">extends</span> <span class="title">BaseActivity</span> </span>&#123;</span><br><span class="line">	<span class="annotation">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">		Log.d(<span class="string">"ThirdActivity"</span>, <span class="string">"Task id is "</span> + getTaskId());</span><br><span class="line">		requestWindowFeature(Window.FEATURE_NO_TITLE);</span><br><span class="line">		setContentView(R.layout.third_layout);</span><br><span class="line">		Button button = (Button) findViewById(R.id.button);</span><br><span class="line">		button3.setOnClickListener(<span class="keyword">new</span> OnClickListener() &#123;</span><br><span class="line">			<span class="annotation">@Override</span></span><br><span class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</span><br><span class="line">				ActivityCollector.finishAll();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="Start_a_activity">Start a activity</h1><h3 id="Old_school">Old school</h3><figure class="highlight openscad"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Intent intent = new Intent<span class="params">(FirstActivity.this, SecondActivity.class)</span>;</span><br><span class="line">intent.putExtra<span class="params">(<span class="string">"param1"</span>, <span class="string">"data1"</span>)</span>;</span><br><span class="line">intent.putExtra<span class="params">(<span class="string">"param2"</span>, <span class="string">"data2"</span>)</span>;</span><br><span class="line">startActivity<span class="params">(intent)</span>;</span><br></pre></td></tr></table></figure>
-<h3 id="Do_this">Do this</h3><p>Define a method in the target activity<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">SecondActivity</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">BaseActivity</span> &#123;</span></span><br><span class="line">	public static void actionStart(<span class="type">Context</span> context, <span class="type">String</span> data1, <span class="type">String</span> data2) &#123;</span><br><span class="line">		<span class="type">Intent</span> intent = <span class="keyword">new</span> <span class="type">Intent</span>(context, <span class="type">SecondActivity</span>.<span class="keyword">class</span>);</span><br><span class="line">		intent.putExtra(<span class="string">"param1"</span>, data1);</span><br><span class="line">		intent.putExtra(<span class="string">"param2"</span>, data2);</span><br><span class="line">		context.startActivity(intent);</span><br><span class="line">	&#125;</span><br><span class="line">	……</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>Then<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">button.setOnClickListener(<span class="keyword">new</span> OnClickListener() &#123;</span><br><span class="line">	<span class="annotation">@Override</span></span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</span><br><span class="line">		SecondActivity.actionStart(FirstActivity.<span class="keyword">this</span>, <span class="string">"data1"</span>, <span class="string">"data2"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+        <span itemprop="articleBody"><p>在对应的activity中,重载函数onConfigurationChanged<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">voidonConfigurationChanged</span><span class="params">(Configuration newConfig)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onConfigurationChanged(newConfig);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在该函数中可以通过两种方法检测当前的屏幕状态：</p>
+<ul>
+<li><p>判断newConfig是否等于</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">Configuration</span><span class="class">.ORIENTATION_LANDSCAPE</span>,</span><br><span class="line"><span class="tag">Configuration</span><span class="class">.ORIENTATION_PORTRAIT</span></span><br></pre></td></tr></table></figure>
+<p>当然,这种方法只能判断屏幕是否为横屏,或者竖屏,不能获取具体的旋转角度.</p>
+</li>
+<li><p>调用</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">this</span><span class="class">.getWindowManager</span>()<span class="class">.getDefaultDisplay</span>()<span class="class">.getRotation</span>();</span><br></pre></td></tr></table></figure>
+<p>该函数的返回值,有如下四种：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Surface<span class="class">.ROTATION_0</span>,</span><br><span class="line">Surface<span class="class">.ROTATION_90</span>,</span><br><span class="line">Surface<span class="class">.ROTATION_180</span>,</span><br><span class="line">Surface.ROTATION_270</span><br></pre></td></tr></table></figure>
+<p>其中,Surface.ROTATION_0 表示的是手机竖屏方向向上,后面几个以此为基准依次以顺时针90度递增.</p>
+<h3 id="Bug:_它只能一次旋转90度,_如果你突然一下子旋转180度,_onConfigurationChanged函数不会被调用-">Bug: 它只能一次旋转90度, 如果你突然一下子旋转180度, onConfigurationChanged函数不会被调用.</h3></li>
+</ul>
+<h2 id="实时判断屏幕旋转的每一个角度">实时判断屏幕旋转的每一个角度</h2><p>上面说的各种屏幕旋转角度的判断至多只能判断 0, 90 , 180, 270 四个角度,如果希望实时获取每一个角度的变化,则可以通过OrientationEventListener 来实现.</p>
+<ul>
+<li><p>创建一个类继承OrientationEventListener</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">MyOrientationDetector</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">OrientationEventListener</span>&#123;</span></span><br><span class="line">    public <span class="type">MyOrientationDetector</span>( <span class="type">Context</span> context ) &#123;</span><br><span class="line">        <span class="keyword">super</span>(context );</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    public void onOrientationChanged(int orientation) &#123;</span><br><span class="line">        <span class="type">Log</span>.i(<span class="string">"MyOrientationDetector "</span>,<span class="string">"onOrientationChanged:"</span>+orientation);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>开启和关闭监听<br>可以在 activity 中创建MyOrientationDetector 类的对象,注意,监听的开启的关闭,是由该类的父类的 enable() 和 disable() 方法实现的.<br>因此,可以在activity的<br>onResume() 中调用MyOrientationDetector 对象的 enable方法,<br>onPause() 中调用MyOrientationDetector 对象的 disable方法来完成功能.</p>
+</li>
+<li><p>监测指定的屏幕旋转角度</p>
+<p>MyOrientationDetector类的onOrientationChanged 参数orientation是一个从0～359的变量,如果只希望处理四个方向,加一个判断即可：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(orientation == OrientationEventListener.ORIENTATION_UNKNOWN) &#123;</span><br><span class="line">    <span class="keyword">return</span>;  <span class="comment">//手机平放时,检测不到有效的角度</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//只检测是否有四个角度的改变</span></span><br><span class="line"><span class="keyword">if</span>( orientation &gt; <span class="number">350</span> || orientation&lt; <span class="number">10</span> ) &#123; <span class="comment">//0度</span></span><br><span class="line">     orientation = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>( orientation &gt; <span class="number">80</span> &amp;&amp;orientation &lt; <span class="number">100</span> ) &#123; <span class="comment">//90度</span></span><br><span class="line">    orientation= <span class="number">90</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>( orientation &gt; <span class="number">170</span> &amp;&amp;orientation &lt; <span class="number">190</span> ) &#123; <span class="comment">//180度</span></span><br><span class="line">    orientation= <span class="number">180</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>( orientation &gt; <span class="number">260</span> &amp;&amp;orientation &lt; <span class="number">280</span>  ) &#123; <span class="comment">//270度</span></span><br><span class="line">    orientation= <span class="number">270</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line">Log.i(<span class="string">"MyOrientationDetector "</span>,<span class="string">"onOrientationChanged:"</span>+orientation);</span><br></pre></td></tr></table></figure></li>
+</ul>
 </span>
       
     </div>
@@ -203,13 +232,11 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/09/06/Context-trick/" rel="prev">Context trick</a>
-            
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/09/01/About-singleton/" rel="next">About singleton</a>
+              <a href="/2015/09/08/Android-UI-Template-Design/" rel="next">Android UI Template Design</a>
             
           </div>
         </div>
@@ -319,7 +346,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Knowing_info_of_current_activity"><span class="nav-number">1.</span> <span class="nav-text">Knowing info of current activity</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Finish_all_activities"><span class="nav-number">2.</span> <span class="nav-text">Finish all activities</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Start_a_activity"><span class="nav-number">3.</span> <span class="nav-text">Start a activity</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Old_school"><span class="nav-number">3.0.1.</span> <span class="nav-text">Old school</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Do_this"><span class="nav-number">3.0.2.</span> <span class="nav-text">Do this</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Bug:_它只能一次旋转90度,_如果你突然一下子旋转180度,_onConfigurationChanged函数不会被调用-"><span class="nav-number">1.</span> <span class="nav-text">Bug: 它只能一次旋转90度, 如果你突然一下子旋转180度, onConfigurationChanged函数不会被调用.</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实时判断屏幕旋转的每一个角度"><span class="nav-number"></span> <span class="nav-text">实时判断屏幕旋转的每一个角度</span></a></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
