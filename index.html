@@ -185,7 +185,8 @@
 
       
         
-          <span itemprop="articleBody"><p>在对应的activity中,重载函数onConfigurationChanged<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">voidonConfigurationChanged</span><span class="params">(Configuration newConfig)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onConfigurationChanged(newConfig);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+          <span itemprop="articleBody"><p>整理转载自<a href="http://ticktick.blog.51cto.com/823160/1301209" target="_blank" rel="external">ticktick</a></p>
+<p>在对应的activity中,重载函数onConfigurationChanged<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">voidonConfigurationChanged</span><span class="params">(Configuration newConfig)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onConfigurationChanged(newConfig);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>在该函数中可以通过两种方法检测当前的屏幕状态：</p>
 <ul>
 <li><p>判断newConfig是否等于</p>
