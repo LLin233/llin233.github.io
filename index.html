@@ -154,6 +154,173 @@
           
           
             
+              <a class="post-title-link" href="/2015/11/15/Genymotion-problem-under-windows/" itemprop="url">
+                Genymotion window remain black [Windows]
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-11-15T10:54:12-08:00" content="2015-11-15">
+            2015-11-15
+          </time>
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><hr>
+<p><strong>When I start a virtual device, why does the window remain black?</strong></p>
+<hr>
+<p>The offical Q&amp;A will give you this</p>
+<p><em>You are probably in either of the following situations:</em></p>
+<ul>
+<li><p><em>Your network adapter may be misconfigured. In this case:</em></p>
+<ol>
+<li><em>Run VirtualBox.</em></li>
+<li><em>Open File &gt; Preferences &gt; Network (or VirtualBox &gt; Preferences for Mac OS X).</em></li>
+<li><em>Edit the Host-only Network by clicking .</em></li>
+<li><p><em>Check that the adapter IPv4 address is in the same network (192.168.56.0/24 by default) as the DHCP server address, lower address bound and upper address bound. If not, your virtual device cannot start.<br>You can also remove the Host-only Network by clicking . Genymotion will automatically recreate it at the next virtual device start.</em></p>
+</li>
+<li><p><em>Your firewall may block the application. The Genymotion application must connect to the virtual device via the local network. If you have a firewall, make sure that you allowed connections to the Genymotion network, set to 192.168.56.0/24 by default.<br>You can also check the log files to see whether an error occurred. To do so, please refer to How do I generate an archive containing Genymotion logs of a virtual device?. If there is no error, restart your virtual device directly from the VirtualBox application.</em></p>
+</li>
+</ol>
+</li>
+</ul>
+<hr>
+<p>Have you met this problem when you use genymotion? I met this problem months ago, when I tried to make it work by following above, I failed.<br>and then I forgot to post my solution online as reference to other who might have the same problem. Here it is.</p>
+<blockquote>
+<p><strong>OS: windows 8.1 x64</strong></p>
+</blockquote>
+<p>I ran the vm with the VirtualBox and got this error: </p>
+<blockquote>
+<p>init : cannot find ‘/system/bin/install-recovery.sh’ , disabling ‘flash_recovery’<br>IP Management : 192.168.56.101<br>failed to execute /sbin/v86d make sure that the v86d helper is<br>installed and executable Getting VBE info block failed (eax=0x4f00,err=-2)<br>vbe_init() failed with -22 </p>
+</blockquote>
+<p>I have tried </p>
+<ul>
+<li>reinstall both genymotion and VirtualBox</li>
+<li>upgrade and downgrade VirtualBox</li>
+</ul>
+<p>Did not work.</p>
+<p>After submited a ticket to genymotion team, I got a feedback:</p>
+<blockquote>
+<p><em>Hello,</em></p>
+<p><em>Running the VM from Virtualbox is not supported. You should use the “launchpad” that can be started by clicking on the Genymotion icon.</em></p>
+<p><em>Regards,</em></p>
+<p><em>Genymotion Support Team</em></p>
+</blockquote>
+<p>Which provides no help. After a lot of google searches,<br>I find a solution, it does not relate to Genymotion directly,</p>
+<p><strong>Uninstall one of the Windows 8 patches, KB3045999.</strong><br><strong>This will affect to every user who is running virtual box under Win8.</strong></p>
+<p>If you have the same problem under windows as I did, please give it a shot.</p>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2015/10/19/CoordinatorLayout-Note/" itemprop="url">
+                CoordinatorLayout Note
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-10-19T14:46:34-07:00" content="2015-10-19">
+            2015-10-19
+          </time>
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><p><a href="https://www.youtube.com/watch?v=x5o2hGMMmIw" target="_blank" rel="external">https://www.youtube.com/watch?v=x5o2hGMMmIw</a></p>
+<p>2 ways to attach behavior to the view:<br>Annotation, XML</p>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
               <a class="post-title-link" href="/2015/10/12/How-to-track-email-openning/" itemprop="url">
                 How to track open status of an E-Mail
               </a>
@@ -277,67 +444,6 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(orientation == OrientationEventListener.ORIENTATION_UNKNOWN) &#123;</span><br><span class="line">    <span class="keyword">return</span>;  <span class="comment">//手机平放时,检测不到有效的角度</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//只检测是否有四个角度的改变</span></span><br><span class="line"><span class="keyword">if</span>( orientation &gt; <span class="number">350</span> || orientation&lt; <span class="number">10</span> ) &#123; <span class="comment">//0度</span></span><br><span class="line">     orientation = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>( orientation &gt; <span class="number">80</span> &amp;&amp;orientation &lt; <span class="number">100</span> ) &#123; <span class="comment">//90度</span></span><br><span class="line">    orientation= <span class="number">90</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>( orientation &gt; <span class="number">170</span> &amp;&amp;orientation &lt; <span class="number">190</span> ) &#123; <span class="comment">//180度</span></span><br><span class="line">    orientation= <span class="number">180</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>( orientation &gt; <span class="number">260</span> &amp;&amp;orientation &lt; <span class="number">280</span>  ) &#123; <span class="comment">//270度</span></span><br><span class="line">    orientation= <span class="number">270</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line">Log.i(<span class="string">"MyOrientationDetector "</span>,<span class="string">"onOrientationChanged:"</span>+orientation);</span><br></pre></td></tr></table></figure></li>
 </ul>
 </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/09/08/Android-UI-Template-Design/" itemprop="url">
-                Android UI Template Design
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-09-08T12:44:04-07:00" content="2015-09-08">
-            2015-09-08
-          </time>
-        </span>
-
-        
-
-        
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h1 id="Example_TopActionBar">Example TopActionBar</h1><h2 id="如何自定义控件属性">如何自定义控件属性</h2><h2 id="如何动态创建组件">如何动态创建组件</h2><h2 id="如何设计动态模板">如何设计动态模板</h2><h2 id="模板化开发的便利之处">模板化开发的便利之处</h2><h2 id="接口回调">接口回调</h2></span>
         
       
     </div>
@@ -587,7 +693,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-count">7</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
