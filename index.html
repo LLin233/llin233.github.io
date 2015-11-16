@@ -156,6 +156,91 @@
           
           
             
+              <a class="post-title-link" href="/2015/11/16/How-to-prevent-service/" itemprop="url">
+                How to prevent our services of Android app from being killed?
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          Posted on
+          <time itemprop="dateCreated" datetime="2015-11-16T10:58:11-08:00" content="2015-11-16">
+            2015-11-16
+          </time>
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><p>Sometimes we need our services to do the work but they often were killed by something like a app management tool, here’s some tricks might help.</p>
+<ul>
+<li><p><strong>Service Flag</strong></p>
+<p>  Set to <strong>_START<em>STICKY</em></strong>, after around 5 sec of service being killed, it will restart, and pass Intent again.</p>
+  <figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Override</span>  </span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">int</span> <span class="title">onStartCommand</span><span class="params">(Intent intent, <span class="keyword">int</span> flags, <span class="keyword">int</span> startId)</span> </span>&#123;  </span><br><span class="line">    flags = START_STICKY;  </span><br><span class="line">    <span class="function"><span class="keyword">return</span> <span class="keyword">super</span>.<span class="title">onStartCommand</span><span class="params">(intent, flags, startId)</span></span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><strong>startForeground</strong></p>
+<p>Use the <strong>startForeground(int, Notification)</strong> API to put the service in a foreground state, where the system considers it to be something the user is actively aware of and thus not a candidate for killing when low on memory. (It is still theoretically possible for the service to be killed under extreme memory pressure from the current foreground application, but in practice this should not be a concern.) [From offical]</p>
+</li>
+</ul>
+</li>
+<li><p><strong>Twin Service</strong></p>
+<p>Create 2 services to protect each other. they will restart the other service when it was killed.</p>
+</li>
+<li><p><strong>Evil Trick</strong> [Have not tried it yet]</p>
+<p>Remain 1px size page in the foreground to stay in a foreground state when application goes to background.</p>
+</li>
+<li><p><strong>Disguise App as system app</strong> [<em>Android 4.0</em>]</p>
+<p>  Make your app as a system app by changing the proper permissions in a rooted device.</p>
+</li>
+<li><p><strong>White list</strong></p>
+<p>Contact manufacturer.</p>
+</li>
+</ul>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
               <a class="post-title-link" href="/2015/11/15/Genymotion-problem-under-windows/" itemprop="url">
                 Genymotion window remain black [Windows]
               </a>
@@ -695,7 +780,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-count">8</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>

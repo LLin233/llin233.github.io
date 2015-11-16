@@ -28,7 +28,7 @@
 
 
 
-  <meta name="keywords" content="Java," />
+  <meta name="keywords" content="Android," />
 
 
 
@@ -37,16 +37,25 @@
   <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
 
 
-<meta name="description" content="推荐实现方式[面试向]1234567891011121314public class Singleton &amp;#123;    // Private constructor suppresses       private Singleton() &amp;#123;    &amp;#125;    private static class LazyHolder &amp;#123;        static fina">
+<meta name="description" content="Sometimes we need our services to do the work but they often were killed by something like a app management tool, here’s some tricks might help.
+
+Service Flag
+  Set to _STARTSTICKY, after around 5 sec">
 <meta property="og:type" content="article">
-<meta property="og:title" content="About singleton">
-<meta property="og:url" content="http://llin233.github.io/2015/09/01/About-singleton/index.html">
+<meta property="og:title" content="How to prevent our services of Android app from being killed?">
+<meta property="og:url" content="http://llin233.github.io/2015/11/16/How-to-prevent-service/index.html">
 <meta property="og:site_name" content="Muya's Codepath">
-<meta property="og:description" content="推荐实现方式[面试向]1234567891011121314public class Singleton &amp;#123;    // Private constructor suppresses       private Singleton() &amp;#123;    &amp;#125;    private static class LazyHolder &amp;#123;        static fina">
-<meta property="og:updated_time" content="2015-09-01T08:07:47.400Z">
+<meta property="og:description" content="Sometimes we need our services to do the work but they often were killed by something like a app management tool, here’s some tricks might help.
+
+Service Flag
+  Set to _STARTSTICKY, after around 5 sec">
+<meta property="og:updated_time" content="2015-11-16T19:03:01.554Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="About singleton">
-<meta name="twitter:description" content="推荐实现方式[面试向]1234567891011121314public class Singleton &amp;#123;    // Private constructor suppresses       private Singleton() &amp;#123;    &amp;#125;    private static class LazyHolder &amp;#123;        static fina">
+<meta name="twitter:title" content="How to prevent our services of Android app from being killed?">
+<meta name="twitter:description" content="Sometimes we need our services to do the work but they often were killed by something like a app management tool, here’s some tricks might help.
+
+Service Flag
+  Set to _STARTSTICKY, after around 5 sec">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -56,7 +65,7 @@
   };
 </script>
 
-  <title> About singleton | Muya's Codepath </title>
+  <title> How to prevent our services of Android app from being killed? | Muya's Codepath </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -155,7 +164,7 @@
           
           
             
-              About singleton
+              How to prevent our services of Android app from being killed?
             
           
         </h1>
@@ -164,8 +173,8 @@
       <div class="post-meta">
         <span class="post-time">
           Posted on
-          <time itemprop="dateCreated" datetime="2015-09-01T00:58:35-07:00" content="2015-09-01">
-            2015-09-01
+          <time itemprop="dateCreated" datetime="2015-11-16T10:58:11-08:00" content="2015-11-16">
+            2015-11-16
           </time>
         </span>
 
@@ -183,11 +192,30 @@
       
 
       
-        <span itemprop="articleBody"><p>推荐实现方式[面试向]<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Private constructor suppresses   </span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">LazyHolder</span> </span>&#123;</span><br><span class="line">        <span class="keyword">static</span> <span class="keyword">final</span> Singleton INSTANCE = <span class="keyword">new</span> Singleton();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> LazyHolder.INSTANCE;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>JVM 在类的初始化阶段（即在 Class 被加载后，且被线程使用之前），会执行类的初始化。在执行类的初始化期间，JVM 会去获取一个锁。这个锁可以同步多个线程对同一个类的初始化。相比其他实现方案（如 double-checked locking 等），该技术方案的实现代码较为简洁，并且在所有版本的编译器中都是可行的。</p>
-<h2 id="Heads-up">Heads-up</h2><p>有一种叫做 双重检查锁 (double-checked locking)</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">volatile</span> Singleton INSTANCE = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Private constructor suppresses </span></span><br><span class="line">    <span class="comment">// default public constructor</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//thread safe and performance  promote </span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (INSTANCE == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (Singleton.class) &#123;</span><br><span class="line">                <span class="comment">//when more than two threads run into the first null check same time, to avoid instanced more than one time, it needs to be checked again.</span></span><br><span class="line">                <span class="keyword">if</span> (INSTANCE == <span class="keyword">null</span>) &#123;</span><br><span class="line">                    INSTANCE = <span class="keyword">new</span> Singleton();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> INSTANCE;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>此种方法只能用在 JDK5 及以后版本 (注意 INSTANCE 被声明为 volatile)，之前的版本使用 “双重检查锁” 会发生非预期行为.</p>
+        <span itemprop="articleBody"><p>Sometimes we need our services to do the work but they often were killed by something like a app management tool, here’s some tricks might help.</p>
+<ul>
+<li><p><strong>Service Flag</strong></p>
+<p>  Set to <strong>_START<em>STICKY</em></strong>, after around 5 sec of service being killed, it will restart, and pass Intent again.</p>
+  <figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Override</span>  </span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">int</span> <span class="title">onStartCommand</span><span class="params">(Intent intent, <span class="keyword">int</span> flags, <span class="keyword">int</span> startId)</span> </span>&#123;  </span><br><span class="line">    flags = START_STICKY;  </span><br><span class="line">    <span class="function"><span class="keyword">return</span> <span class="keyword">super</span>.<span class="title">onStartCommand</span><span class="params">(intent, flags, startId)</span></span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><strong>startForeground</strong></p>
+<p>Use the <strong>startForeground(int, Notification)</strong> API to put the service in a foreground state, where the system considers it to be something the user is actively aware of and thus not a candidate for killing when low on memory. (It is still theoretically possible for the service to be killed under extreme memory pressure from the current foreground application, but in practice this should not be a concern.) [From offical]</p>
+</li>
+</ul>
+</li>
+<li><p><strong>Twin Service</strong></p>
+<p>Create 2 services to protect each other. they will restart the other service when it was killed.</p>
+</li>
+<li><p><strong>Evil Trick</strong> [Have not tried it yet]</p>
+<p>Remain 1px size page in the foreground to stay in a foreground state when application goes to background.</p>
+</li>
+<li><p><strong>Disguise App as system app</strong> [<em>Android 4.0</em>]</p>
+<p>  Make your app as a system app by changing the proper permissions in a rooted device.</p>
+</li>
+<li><p><strong>White list</strong></p>
+<p>Contact manufacturer.</p>
+</li>
+</ul>
 </span>
       
     </div>
@@ -196,7 +224,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Java/" rel="tag">#Java</a>
+            <a href="/tags/Android/" rel="tag">#Android</a>
           
         </div>
       
@@ -205,11 +233,11 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/09/06/Android-Better-Practice-Activity/" rel="prev">Android Better Practice : Activity</a>
-            
           </div>
 
           <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/11/15/Genymotion-problem-under-windows/" rel="next">Genymotion window remain black [Windows]</a>
             
           </div>
         </div>
@@ -319,7 +347,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Heads-up"><span class="nav-number">1.</span> <span class="nav-text">Heads-up</span></a></li></ol></div>
+              <p class="post-toc-empty">This post does not have a Table Of Contents</p>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
