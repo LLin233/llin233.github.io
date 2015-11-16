@@ -45,7 +45,7 @@ Service FlagSet to START_STICKY, after around 5 sec of">
 <meta property="og:site_name" content="Muya's Codepath">
 <meta property="og:description" content="Sometimes we need our services to do the work but they often were killed by something like a app management tool, here’s some tricks might help.
 Service FlagSet to START_STICKY, after around 5 sec of">
-<meta property="og:updated_time" content="2015-11-16T21:05:49.978Z">
+<meta property="og:updated_time" content="2015-11-16T21:49:21.384Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="How to prevent our services of Android app from being killed?">
 <meta name="twitter:description" content="Sometimes we need our services to do the work but they often were killed by something like a app management tool, here’s some tricks might help.
@@ -188,7 +188,7 @@ Service FlagSet to START_STICKY, after around 5 sec of">
       
         <span itemprop="articleBody"><p>Sometimes we need our services to do the work but they often were killed by something like a app management tool, here’s some tricks might help.</p>
 <h2 id="Service_Flag"><strong>Service Flag</strong></h2><p>Set to <strong>START_STICKY</strong>, after around 5 sec of service being killed, it will restart, and pass Intent again.<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Override</span>  </span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">int</span> <span class="title">onStartCommand</span><span class="params">(Intent intent, <span class="keyword">int</span> flags, <span class="keyword">int</span> startId)</span> </span>&#123;  </span><br><span class="line">    flags = START_STICKY;  </span><br><span class="line">    <span class="function"><span class="keyword">return</span> <span class="keyword">super</span>.<span class="title">onStartCommand</span><span class="params">(intent, flags, startId)</span></span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="Use_startForeground"><strong>Use startForeground</strong></h2><p>Use the <strong>startForeground(int, Notification)</strong> API to put the service in a foreground state, where the system considers it to be something the user is actively aware of and thus not a candidate for killing when low on memory. (It is still theoretically possible for the service to be killed under extreme memory pressure from the current foreground application, but in practice this should not be a concern.) [From offical]</p>
+<h2 id="Use_startForeground"><strong>Use startForeground</strong></h2><p>Use the <strong>startForeground(int, Notification)</strong> API to put the service in a foreground state, where the system considers it to be something the user is actively aware of and thus not a candidate for killing when low on memory. (It is still theoretically possible for the service to be killed under extreme memory pressure from the current foreground application, but in practice this should not be a concern.) [From <a href="http://developer.android.com/reference/android/app/Service.html" target="_blank" rel="external">official doc</a>]</p>
 <h2 id="Twin_Service"><strong>Twin Service</strong></h2><p>Create 2 services to protect each other. they will restart the other service when it was killed.</p>
 <h2 id="Evil_Trick_[Have_not_tried_it_yet]"><strong>Evil Trick</strong> [Have not tried it yet]</h2><p>Remain 1px size page in the foreground to stay in a foreground state when application goes to background.</p>
 <h2 id="Disguise_App_as_system_app_[Android_4-0]"><strong>Disguise App as system app</strong> [<em>Android 4.0</em>]</h2><p>Install your apk into <strong><em>/system/app</em></strong>.<br>Make your app as a system app by changing the proper permissions in a rooted device.</p>
@@ -280,7 +280,7 @@ Service FlagSet to START_STICKY, after around 5 sec of">
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-count">9</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>

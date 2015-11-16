@@ -28,7 +28,7 @@
 
 
 
-  <meta name="keywords" content="Android," />
+  <meta name="keywords" content="Hexo,next" />
 
 
 
@@ -37,16 +37,19 @@
   <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
 
 
-<meta name="description" content="12345678910public class MyApplication extends Application &amp;#123;	private static Context context;	@Override	public void onCreate() &amp;#123;		context = getApplicationContext();	&amp;#125;	public static Contex">
+<meta name="description" content="From now on, I will try my best to build a English blog, after all, I am working in the U.S.
+You are welcome if this helped you, and if there’s any question or problem, you can find me easily in the g">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Context trick">
-<meta property="og:url" content="http://llin233.github.io/2015/09/06/Context-trick/index.html">
+<meta property="og:title" content="Announcement">
+<meta property="og:url" content="http://llin233.github.io/2015/10/19/announcement20151015/index.html">
 <meta property="og:site_name" content="Muya's Codepath">
-<meta property="og:description" content="12345678910public class MyApplication extends Application &amp;#123;	private static Context context;	@Override	public void onCreate() &amp;#123;		context = getApplicationContext();	&amp;#125;	public static Contex">
-<meta property="og:updated_time" content="2015-09-06T22:28:11.760Z">
+<meta property="og:description" content="From now on, I will try my best to build a English blog, after all, I am working in the U.S.
+You are welcome if this helped you, and if there’s any question or problem, you can find me easily in the g">
+<meta property="og:updated_time" content="2015-11-16T21:57:04.035Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Context trick">
-<meta name="twitter:description" content="12345678910public class MyApplication extends Application &amp;#123;	private static Context context;	@Override	public void onCreate() &amp;#123;		context = getApplicationContext();	&amp;#125;	public static Contex">
+<meta name="twitter:title" content="Announcement">
+<meta name="twitter:description" content="From now on, I will try my best to build a English blog, after all, I am working in the U.S.
+You are welcome if this helped you, and if there’s any question or problem, you can find me easily in the g">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -56,7 +59,7 @@
   };
 </script>
 
-  <title> Context trick | Muya's Codepath </title>
+  <title> Announcement | Muya's Codepath </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -155,7 +158,7 @@
           
           
             
-              Context trick
+              Announcement
             
           
         </h1>
@@ -164,8 +167,8 @@
       <div class="post-meta">
         <span class="post-time">
           Posted on
-          <time itemprop="dateCreated" datetime="2015-09-06T15:18:45-07:00" content="2015-09-06">
-            2015-09-06
+          <time itemprop="dateCreated" datetime="2015-10-19T12:46:34-07:00" content="2015-10-19">
+            2015-10-19
           </time>
         </span>
 
@@ -183,34 +186,26 @@
       
 
       
-        <span itemprop="articleBody"><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyApplication</span> <span class="keyword">extends</span> <span class="title">Application</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> Context context;</span><br><span class="line">	<span class="annotation">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		context = getApplicationContext();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Context <span class="title">getContext</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> context;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Changes in AndroidManifest.xml</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">manifest</span> <span class="attribute">xmlns:android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line"><span class="attribute">package</span>=<span class="value">"com.example.networktest"</span></span><br><span class="line"><span class="attribute">android:versionCode</span>=<span class="value">"1"</span></span><br><span class="line"><span class="attribute">android:versionName</span>=<span class="value">"1.0"</span> &gt;</span></span><br><span class="line">……</span><br><span class="line">	<span class="tag">&lt;<span class="title">application</span></span><br><span class="line">		<span class="attribute">android:name</span>=<span class="value">"com.example.networktest.MyApplication"</span></span><br><span class="line">	…… &gt;</span></span><br><span class="line">	……</span><br><span class="line">	<span class="tag">&lt;/<span class="title">application</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">manifest</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>Access context wherever you needed, for example:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sendHttpRequest</span><span class="params">(<span class="keyword">final</span> String address,</span><br><span class="line">	<span class="keyword">final</span> HttpCallbackListener listener)</span> </span>&#123;</span><br><span class="line">	…… <span class="comment">//do something</span></span><br><span class="line">	<span class="keyword">if</span> (!isNetworkAvailable()) &#123;</span><br><span class="line">		Toast.makeText(MyApplication.getContext()</span><br><span class="line">				, <span class="string">"network is unavailable"</span></span><br><span class="line">				,Toast.LENGTH_SHORT).show();</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	…… <span class="comment">//do something</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+        <span itemprop="articleBody"><p>From now on, I will try my best to build a English blog, after all, I am working in the U.S.</p>
+<p>You are welcome if this helped you, and if there’s any question or problem, you can find me easily in the github.</p>
 </span>
       
     </div>
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/Android/" rel="tag">#Android</a>
-          
-        </div>
-      
 
       
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/09/14/Android-Check-Device-Orientation-In-Real-Time/" rel="prev">How to check orientation of your Android device in real time</a>
+              <a href="/2015/10/19/CoordinatorLayout-Note/" rel="prev">CoordinatorLayout Note</a>
             
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/09/06/Android-Better-Practice-Activity/" rel="next">Android Better Practice : Activity</a>
+              <a href="/2015/10/12/How-to-track-email-openning/" rel="next">How to track open status of an E-Mail</a>
             
           </div>
         </div>
