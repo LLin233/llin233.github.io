@@ -156,6 +156,69 @@
           
           
             
+              <a class="post-title-link" href="/2015/12/08/Android-How-to-update-your-db-of-App-in-a-good-way/" itemprop="url">
+                Android: How to update your db of App in a good way
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          Posted on
+          <time itemprop="dateCreated" datetime="2015-12-08T14:30:53-08:00" content="2015-12-08">
+            2015-12-08
+          </time>
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyDatabaseHelper</span> <span class="keyword">extends</span> <span class="title">SQLiteOpenHelper</span> </span>&#123;</span><br><span class="line">	<span class="comment">//version 1 </span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String CREATE_BOOK = <span class="string">"create table Book ("</span></span><br><span class="line">		+ <span class="string">"id integer primary key autoincrement, "</span></span><br><span class="line">		+ <span class="string">"author text, "</span></span><br><span class="line">		+ <span class="string">"price real, "</span></span><br><span class="line">		+ <span class="string">"pages integer, "</span></span><br><span class="line">		+ <span class="string">"name text, "</span></span><br><span class="line">        	<span class="comment">// version 3</span></span><br><span class="line">		+ <span class="string">"category_id integer)"</span>; </span><br><span class="line">	</span><br><span class="line">	<span class="comment">//version 2, added a table</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String CREATE_CATEGORY = <span class="string">"create table Category ("</span></span><br><span class="line">		+ <span class="string">"id integer primary key autoincrement, "</span></span><br><span class="line">		+ <span class="string">"category_name text, "</span></span><br><span class="line">		+ <span class="string">"category_code integer)"</span>;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">MyDatabaseHelper</span><span class="params">(Context context, String name,CursorFactory factory, <span class="keyword">int</span> version)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>(context, name, factory, version);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="annotation">@Override</span></span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(SQLiteDatabase db)</span> </span>&#123;</span><br><span class="line">		db.execSQL(CREATE_BOOK);</span><br><span class="line">		db.execSQL(CREATE_CATEGORY);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="annotation">@Override</span></span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onUpgrade</span><span class="params">(SQLiteDatabase db, <span class="keyword">int</span> oldVersion, <span class="keyword">int</span> newVersion)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">switch</span> (oldVersion) &#123;</span><br><span class="line">		<span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">			db.execSQL(CREATE_CATEGORY);</span><br><span class="line">		<span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">			db.execSQL(<span class="string">"alter table Book add column category_id integer"</span>);</span><br><span class="line">		<span class="keyword">default</span>:</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>notice there is no key word ‘break’  inside the switch block,  therefore, no matter which version that user installed, the db update will be ran properly, and keep the database up to date.</p>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
               <a class="post-title-link" href="/2015/11/16/How-to-prevent-service/" itemprop="url">
                 How to prevent our services of Android app from being killed?
               </a>
@@ -569,7 +632,8 @@
 <p>其中,Surface.ROTATION_0 表示的是手机竖屏方向向上,后面几个以此为基准依次以顺时针90度递增.</p>
 <h3 id="Bug:_它只能一次旋转90度,_如果你突然一下子旋转180度,_onConfigurationChanged函数不会被调用-">Bug: 它只能一次旋转90度, 如果你突然一下子旋转180度, onConfigurationChanged函数不会被调用.</h3></li>
 </ul>
-<h2 id="实时判断屏幕旋转的每一个角度">实时判断屏幕旋转的每一个角度</h2><p>上面说的各种屏幕旋转角度的判断至多只能判断 0, 90 , 180, 270 四个角度,如果希望实时获取每一个角度的变化,则可以通过OrientationEventListener 来实现.</p>
+<p>实时判断屏幕旋转的每一个角度</p>
+<p>上面说的各种屏幕旋转角度的判断至多只能判断 0, 90 , 180, 270 四个角度,如果希望实时获取每一个角度的变化,则可以通过OrientationEventListener 来实现.</p>
 <ul>
 <li><p>创建一个类继承OrientationEventListener</p>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">MyOrientationDetector</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">OrientationEventListener</span>&#123;</span></span><br><span class="line">    public <span class="type">MyOrientationDetector</span>( <span class="type">Context</span> context ) &#123;</span><br><span class="line">        <span class="keyword">super</span>(context );</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    public void onOrientationChanged(int orientation) &#123;</span><br><span class="line">        <span class="type">Log</span>.i(<span class="string">"MyOrientationDetector "</span>,<span class="string">"onOrientationChanged:"</span>+orientation);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -830,7 +894,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-count">10</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>

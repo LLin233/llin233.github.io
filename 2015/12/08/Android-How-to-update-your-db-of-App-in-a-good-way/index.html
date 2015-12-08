@@ -28,7 +28,7 @@
 
 
 
-  <meta name="keywords" content="Java," />
+  <meta name="keywords" content="Android," />
 
 
 
@@ -37,16 +37,16 @@
   <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
 
 
-<meta name="description" content="推荐实现方式[面试向]1234567891011121314public class Singleton &amp;#123;    // Private constructor suppresses       private Singleton() &amp;#123;    &amp;#125;    private static class LazyHolder &amp;#123;        static fina">
+<meta name="description" content="1234567891011121314151617181920212223242526272829303132333435public class MyDatabaseHelper extends SQLiteOpenHelper &amp;#123;	//version 1 	public static final String CREATE_BOOK = &quot;create table Book (&quot;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="About singleton">
-<meta property="og:url" content="http://llin233.github.io/2015/09/01/About-singleton/index.html">
+<meta property="og:title" content="Android: How to update your db of App in a good way">
+<meta property="og:url" content="http://llin233.github.io/2015/12/08/Android-How-to-update-your-db-of-App-in-a-good-way/index.html">
 <meta property="og:site_name" content="Muya's Codepath">
-<meta property="og:description" content="推荐实现方式[面试向]1234567891011121314public class Singleton &amp;#123;    // Private constructor suppresses       private Singleton() &amp;#123;    &amp;#125;    private static class LazyHolder &amp;#123;        static fina">
-<meta property="og:updated_time" content="2015-09-01T08:07:47.400Z">
+<meta property="og:description" content="1234567891011121314151617181920212223242526272829303132333435public class MyDatabaseHelper extends SQLiteOpenHelper &amp;#123;	//version 1 	public static final String CREATE_BOOK = &quot;create table Book (&quot;">
+<meta property="og:updated_time" content="2015-12-08T22:36:41.030Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="About singleton">
-<meta name="twitter:description" content="推荐实现方式[面试向]1234567891011121314public class Singleton &amp;#123;    // Private constructor suppresses       private Singleton() &amp;#123;    &amp;#125;    private static class LazyHolder &amp;#123;        static fina">
+<meta name="twitter:title" content="Android: How to update your db of App in a good way">
+<meta name="twitter:description" content="1234567891011121314151617181920212223242526272829303132333435public class MyDatabaseHelper extends SQLiteOpenHelper &amp;#123;	//version 1 	public static final String CREATE_BOOK = &quot;create table Book (&quot;">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -56,7 +56,7 @@
   };
 </script>
 
-  <title> About singleton | Muya's Codepath </title>
+  <title> Android: How to update your db of App in a good way | Muya's Codepath </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -155,7 +155,7 @@
           
           
             
-              About singleton
+              Android: How to update your db of App in a good way
             
           
         </h1>
@@ -164,8 +164,8 @@
       <div class="post-meta">
         <span class="post-time">
           Posted on
-          <time itemprop="dateCreated" datetime="2015-09-01T00:58:35-07:00" content="2015-09-01">
-            2015-09-01
+          <time itemprop="dateCreated" datetime="2015-12-08T14:30:53-08:00" content="2015-12-08">
+            2015-12-08
           </time>
         </span>
 
@@ -183,11 +183,8 @@
       
 
       
-        <span itemprop="articleBody"><p>推荐实现方式[面试向]<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Private constructor suppresses   </span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">LazyHolder</span> </span>&#123;</span><br><span class="line">        <span class="keyword">static</span> <span class="keyword">final</span> Singleton INSTANCE = <span class="keyword">new</span> Singleton();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> LazyHolder.INSTANCE;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>JVM 在类的初始化阶段（即在 Class 被加载后，且被线程使用之前），会执行类的初始化。在执行类的初始化期间，JVM 会去获取一个锁。这个锁可以同步多个线程对同一个类的初始化。相比其他实现方案（如 double-checked locking 等），该技术方案的实现代码较为简洁，并且在所有版本的编译器中都是可行的。</p>
-<h2 id="Heads-up">Heads-up</h2><p>有一种叫做 双重检查锁 (double-checked locking)</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">volatile</span> Singleton INSTANCE = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Private constructor suppresses </span></span><br><span class="line">    <span class="comment">// default public constructor</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//thread safe and performance  promote </span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (INSTANCE == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (Singleton.class) &#123;</span><br><span class="line">                <span class="comment">//when more than two threads run into the first null check same time, to avoid instanced more than one time, it needs to be checked again.</span></span><br><span class="line">                <span class="keyword">if</span> (INSTANCE == <span class="keyword">null</span>) &#123;</span><br><span class="line">                    INSTANCE = <span class="keyword">new</span> Singleton();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> INSTANCE;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>此种方法只能用在 JDK5 及以后版本 (注意 INSTANCE 被声明为 volatile)，之前的版本使用 “双重检查锁” 会发生非预期行为.</p>
+        <span itemprop="articleBody"><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyDatabaseHelper</span> <span class="keyword">extends</span> <span class="title">SQLiteOpenHelper</span> </span>&#123;</span><br><span class="line">	<span class="comment">//version 1 </span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String CREATE_BOOK = <span class="string">"create table Book ("</span></span><br><span class="line">		+ <span class="string">"id integer primary key autoincrement, "</span></span><br><span class="line">		+ <span class="string">"author text, "</span></span><br><span class="line">		+ <span class="string">"price real, "</span></span><br><span class="line">		+ <span class="string">"pages integer, "</span></span><br><span class="line">		+ <span class="string">"name text, "</span></span><br><span class="line">        	<span class="comment">// version 3</span></span><br><span class="line">		+ <span class="string">"category_id integer)"</span>; </span><br><span class="line">	</span><br><span class="line">	<span class="comment">//version 2, added a table</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String CREATE_CATEGORY = <span class="string">"create table Category ("</span></span><br><span class="line">		+ <span class="string">"id integer primary key autoincrement, "</span></span><br><span class="line">		+ <span class="string">"category_name text, "</span></span><br><span class="line">		+ <span class="string">"category_code integer)"</span>;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">MyDatabaseHelper</span><span class="params">(Context context, String name,CursorFactory factory, <span class="keyword">int</span> version)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>(context, name, factory, version);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="annotation">@Override</span></span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(SQLiteDatabase db)</span> </span>&#123;</span><br><span class="line">		db.execSQL(CREATE_BOOK);</span><br><span class="line">		db.execSQL(CREATE_CATEGORY);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="annotation">@Override</span></span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onUpgrade</span><span class="params">(SQLiteDatabase db, <span class="keyword">int</span> oldVersion, <span class="keyword">int</span> newVersion)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">switch</span> (oldVersion) &#123;</span><br><span class="line">		<span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">			db.execSQL(CREATE_CATEGORY);</span><br><span class="line">		<span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">			db.execSQL(<span class="string">"alter table Book add column category_id integer"</span>);</span><br><span class="line">		<span class="keyword">default</span>:</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>notice there is no key word ‘break’  inside the switch block,  therefore, no matter which version that user installed, the db update will be ran properly, and keep the database up to date.</p>
 </span>
       
     </div>
@@ -196,7 +193,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Java/" rel="tag">#Java</a>
+            <a href="/tags/Android/" rel="tag">#Android</a>
           
         </div>
       
@@ -205,11 +202,11 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/09/06/Android-Better-Practice-Activity/" rel="prev">Android Better Practice : Activity</a>
-            
           </div>
 
           <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/11/16/How-to-prevent-service/" rel="next">How to prevent our services of Android app from being killed?</a>
             
           </div>
         </div>
@@ -319,7 +316,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Heads-up"><span class="nav-number">1.</span> <span class="nav-text">Heads-up</span></a></li></ol></div>
+              <p class="post-toc-empty">This post does not have a Table Of Contents</p>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>

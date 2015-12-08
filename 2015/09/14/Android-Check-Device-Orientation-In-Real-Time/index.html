@@ -47,7 +47,7 @@
 <meta property="og:description" content="整理转载自ticktick
 在对应的activity中,重载函数onConfigurationChanged1234@Overridepublic voidonConfigurationChanged(Configuration newConfig) &amp;#123;    super.onConfigurationChanged(newConfig);&amp;#125;
 在该函数中可以通过两种方法检测当前">
-<meta property="og:updated_time" content="2015-09-14T20:04:15.612Z">
+<meta property="og:updated_time" content="2015-12-02T19:34:50.199Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="How to check orientation of your Android device in real time">
 <meta name="twitter:description" content="整理转载自ticktick
@@ -204,7 +204,8 @@
 <p>其中,Surface.ROTATION_0 表示的是手机竖屏方向向上,后面几个以此为基准依次以顺时针90度递增.</p>
 <h3 id="Bug:_它只能一次旋转90度,_如果你突然一下子旋转180度,_onConfigurationChanged函数不会被调用-">Bug: 它只能一次旋转90度, 如果你突然一下子旋转180度, onConfigurationChanged函数不会被调用.</h3></li>
 </ul>
-<h2 id="实时判断屏幕旋转的每一个角度">实时判断屏幕旋转的每一个角度</h2><p>上面说的各种屏幕旋转角度的判断至多只能判断 0, 90 , 180, 270 四个角度,如果希望实时获取每一个角度的变化,则可以通过OrientationEventListener 来实现.</p>
+<p>实时判断屏幕旋转的每一个角度</p>
+<p>上面说的各种屏幕旋转角度的判断至多只能判断 0, 90 , 180, 270 四个角度,如果希望实时获取每一个角度的变化,则可以通过OrientationEventListener 来实现.</p>
 <ul>
 <li><p>创建一个类继承OrientationEventListener</p>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">MyOrientationDetector</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">OrientationEventListener</span>&#123;</span></span><br><span class="line">    public <span class="type">MyOrientationDetector</span>( <span class="type">Context</span> context ) &#123;</span><br><span class="line">        <span class="keyword">super</span>(context );</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    public void onOrientationChanged(int orientation) &#123;</span><br><span class="line">        <span class="type">Log</span>.i(<span class="string">"MyOrientationDetector "</span>,<span class="string">"onOrientationChanged:"</span>+orientation);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -300,7 +301,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-count">10</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -348,7 +349,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Bug:_它只能一次旋转90度,_如果你突然一下子旋转180度,_onConfigurationChanged函数不会被调用-"><span class="nav-number">1.</span> <span class="nav-text">Bug: 它只能一次旋转90度, 如果你突然一下子旋转180度, onConfigurationChanged函数不会被调用.</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实时判断屏幕旋转的每一个角度"><span class="nav-number"></span> <span class="nav-text">实时判断屏幕旋转的每一个角度</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Bug:_它只能一次旋转90度,_如果你突然一下子旋转180度,_onConfigurationChanged函数不会被调用-"><span class="nav-number">1.</span> <span class="nav-text">Bug: 它只能一次旋转90度, 如果你突然一下子旋转180度, onConfigurationChanged函数不会被调用.</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
