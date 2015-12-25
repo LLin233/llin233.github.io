@@ -37,16 +37,22 @@
   <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
 
 
-<meta name="description" content="1234567891011121314151617181920212223242526272829303132333435public class MyDatabaseHelper extends SQLiteOpenHelper &amp;#123;	//version 1 	public static final String CREATE_BOOK = &quot;create table Book (&quot;">
+<meta name="description" content="[waiting for updating]
+Google I/O 2013 - Writing Custom Views for Android
+Custom Views and Performance (100 Days of Google Dev)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android: How to update your db of App in a good way">
-<meta property="og:url" content="http://llin233.github.io/2015/12/08/Android-How-to-update-your-db-of-App-in-a-good-way/index.html">
+<meta property="og:title" content="Note: Custom Views for Android">
+<meta property="og:url" content="http://llin233.github.io/2015/12/25/Note-Custom-Views-for-Android/index.html">
 <meta property="og:site_name" content="Muya's Codepath">
-<meta property="og:description" content="1234567891011121314151617181920212223242526272829303132333435public class MyDatabaseHelper extends SQLiteOpenHelper &amp;#123;	//version 1 	public static final String CREATE_BOOK = &quot;create table Book (&quot;">
-<meta property="og:updated_time" content="2015-12-08T22:36:41.030Z">
+<meta property="og:description" content="[waiting for updating]
+Google I/O 2013 - Writing Custom Views for Android
+Custom Views and Performance (100 Days of Google Dev)">
+<meta property="og:updated_time" content="2015-12-25T22:18:55.415Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android: How to update your db of App in a good way">
-<meta name="twitter:description" content="1234567891011121314151617181920212223242526272829303132333435public class MyDatabaseHelper extends SQLiteOpenHelper &amp;#123;	//version 1 	public static final String CREATE_BOOK = &quot;create table Book (&quot;">
+<meta name="twitter:title" content="Note: Custom Views for Android">
+<meta name="twitter:description" content="[waiting for updating]
+Google I/O 2013 - Writing Custom Views for Android
+Custom Views and Performance (100 Days of Google Dev)">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -56,7 +62,7 @@
   };
 </script>
 
-  <title> Android: How to update your db of App in a good way | Muya's Codepath </title>
+  <title> Note: Custom Views for Android | Muya's Codepath </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -155,7 +161,7 @@
           
           
             
-              Android: How to update your db of App in a good way
+              Note: Custom Views for Android
             
           
         </h1>
@@ -164,8 +170,8 @@
       <div class="post-meta">
         <span class="post-time">
           Posted on
-          <time itemprop="dateCreated" datetime="2015-12-08T14:30:53-08:00" content="2015-12-08">
-            2015-12-08
+          <time itemprop="dateCreated" datetime="2015-12-25T14:16:35-08:00" content="2015-12-25">
+            2015-12-25
           </time>
         </span>
 
@@ -183,8 +189,9 @@
       
 
       
-        <span itemprop="articleBody"><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyDatabaseHelper</span> <span class="keyword">extends</span> <span class="title">SQLiteOpenHelper</span> </span>&#123;</span><br><span class="line">	<span class="comment">//version 1 </span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String CREATE_BOOK = <span class="string">"create table Book ("</span></span><br><span class="line">		+ <span class="string">"id integer primary key autoincrement, "</span></span><br><span class="line">		+ <span class="string">"author text, "</span></span><br><span class="line">		+ <span class="string">"price real, "</span></span><br><span class="line">		+ <span class="string">"pages integer, "</span></span><br><span class="line">		+ <span class="string">"name text, "</span></span><br><span class="line">        	<span class="comment">// version 3</span></span><br><span class="line">		+ <span class="string">"category_id integer)"</span>; </span><br><span class="line">	</span><br><span class="line">	<span class="comment">//version 2, added a table</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String CREATE_CATEGORY = <span class="string">"create table Category ("</span></span><br><span class="line">		+ <span class="string">"id integer primary key autoincrement, "</span></span><br><span class="line">		+ <span class="string">"category_name text, "</span></span><br><span class="line">		+ <span class="string">"category_code integer)"</span>;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">MyDatabaseHelper</span><span class="params">(Context context, String name,CursorFactory factory, <span class="keyword">int</span> version)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>(context, name, factory, version);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="annotation">@Override</span></span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(SQLiteDatabase db)</span> </span>&#123;</span><br><span class="line">		db.execSQL(CREATE_BOOK);</span><br><span class="line">		db.execSQL(CREATE_CATEGORY);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="annotation">@Override</span></span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onUpgrade</span><span class="params">(SQLiteDatabase db, <span class="keyword">int</span> oldVersion, <span class="keyword">int</span> newVersion)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">switch</span> (oldVersion) &#123;</span><br><span class="line">		<span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">			db.execSQL(CREATE_CATEGORY);</span><br><span class="line">		<span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">			db.execSQL(<span class="string">"alter table Book add column category_id integer"</span>);</span><br><span class="line">		<span class="keyword">default</span>:</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>notice there is no key word ‘break’  inside the switch block,  therefore, no matter which version that user installed, the db update will be ran properly, and keep the database up to date.</p>
+        <span itemprop="articleBody"><p>[waiting for updating]</p>
+<p><a href="https://www.youtube.com/watch?v=NYtB6mlu7vA" target="_blank" rel="external">Google I/O 2013 - Writing Custom Views for Android</a></p>
+<p><a href="https://www.youtube.com/watch?v=zK2i7ivzK7M" target="_blank" rel="external">Custom Views and Performance (100 Days of Google Dev)</a></p>
 </span>
       
     </div>
@@ -202,13 +209,11 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/12/25/Note-Custom-Views-for-Android/" rel="prev">Note: Custom Views for Android</a>
-            
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/11/16/How-to-prevent-service/" rel="next">How to prevent our services of Android app from being killed?</a>
+              <a href="/2015/12/08/Android-How-to-update-your-db-of-App-in-a-good-way/" rel="next">Android: How to update your db of App in a good way</a>
             
           </div>
         </div>
