@@ -156,6 +156,91 @@
           
           
             
+              <a class="post-title-link" href="/2016/01/24/Note-Streamlining-Android-Apps-Eliminating-Code-Overhead-by-Jake-Wharton/" itemprop="url">
+                Note: Streamlining Android Apps: Eliminating Code Overhead by Jake Wharton
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          Posted on
+          <time itemprop="dateCreated" datetime="2016-01-24T09:52:26-08:00" content="2016-01-24">
+            2016-01-24
+          </time>
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><p><a href="https://www.youtube.com/watch?v=b6zKBZcg5fk" target="_blank" rel="external">Streamlining Android Apps: Eliminating Code Overhead by Jake Wharton</a></p>
+<p>This talk will focus on techniques that both libraries and applications can implement to ensure their effect is in general without overhead.<br>It’s a really good stuff to Android developers and those Java developers whether they are doing android or not.</p>
+<p><strong>CPU</strong></p>
+<ul>
+<li>Do not nest multi-pass layouts</li>
+<li>Lazily compute complex data when needed</li>
+<li>Cache heavy computational results for re-use</li>
+<li>Consider RenderScript for performance</li>
+<li>Keep work off the main thread</li>
+</ul>
+<p><strong>Memory</strong></p>
+<ul>
+<li>Use object pools and caches to reduce churn</li>
+<li>Be mindful of the overhead of enums</li>
+<li>Do not allocate inside the draw path</li>
+<li>Use specialized collections instead of JDK collection when appropriate (SparseArray)</li>
+</ul>
+<p><strong>I/O</strong></p>
+<ul>
+<li>Batch Operation with reasonable back-off policies</li>
+<li>Use gzip or binary serialization format</li>
+<li>Cache data offline with TTLs for reloading</li>
+<li>Use JobScheduler API to batch across OS</li>
+</ul>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
               <a class="post-title-link" href="/2015/12/25/Note-Custom-Views-for-Android/" itemprop="url">
                 Note: Custom Views for Android
               </a>
@@ -315,13 +400,13 @@
       
         
           <span itemprop="articleBody"><p>Sometimes we need our services to do the work but they often were killed by something like a app management tool, here’s some tricks might help.</p>
-<h2 id="Service_Flag"><strong>Service Flag</strong></h2><p>Set to <strong>START_STICKY</strong>, after around 5 sec of service being killed, it will restart, and pass Intent again.<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Override</span>  </span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">int</span> <span class="title">onStartCommand</span><span class="params">(Intent intent, <span class="keyword">int</span> flags, <span class="keyword">int</span> startId)</span> </span>&#123;  </span><br><span class="line">    flags = START_STICKY;  </span><br><span class="line">    <span class="function"><span class="keyword">return</span> <span class="keyword">super</span>.<span class="title">onStartCommand</span><span class="params">(intent, flags, startId)</span></span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="Use_startForeground"><strong>Use startForeground</strong></h2><p>Use the <strong>startForeground(int, Notification)</strong> API to put the service in a foreground state, where the system considers it to be something the user is actively aware of and thus not a candidate for killing when low on memory. (It is still theoretically possible for the service to be killed under extreme memory pressure from the current foreground application, but in practice this should not be a concern.) [From <a href="http://developer.android.com/reference/android/app/Service.html" target="_blank" rel="external">official doc</a>]</p>
-<h2 id="Twin_Service"><strong>Twin Service</strong></h2><p>Create 2 services to protect each other. they will restart the other service when it was killed.</p>
-<h2 id="Evil_Trick_[Have_not_tried_it_yet]"><strong>Evil Trick</strong> [Have not tried it yet]</h2><p>Remain 1px size page in the foreground to stay in a foreground state when application goes to background.</p>
-<h2 id="Disguise_App_as_system_app_[Android_4-0]"><strong>Disguise App as system app</strong> [<em>Android 4.0</em>]</h2><p>Install your apk into <strong><em>/system/app</em></strong>.<br>Make your app as a system app by changing the proper permissions in a rooted device.</p>
-<h2 id="White_List"><strong>White List</strong></h2><p>Contact manufacturer.</p>
-<h2 id="Listen_To_The_Broadcast"><strong>Listen To The Broadcast</strong></h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">receiver</span> <span class="attribute">android:name</span>=<span class="value">"&lt;Name of your package&gt;.&lt;your class&gt;"</span> &gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">intent-filter</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">action</span> <span class="attribute">android:name</span>=<span class="value">"android.intent.action.BOOT_COMPLETED"</span> /&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">action</span> <span class="attribute">android:name</span>=<span class="value">"android.intent.action.USER_PRESENT"</span> /&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">action</span> <span class="attribute">android:name</span>=<span class="value">"android.intent.action.PACKAGE_RESTARTED"</span> /&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">action</span> <span class="attribute">android:name</span>=<span class="value">"&lt;Name of your package&gt;.&lt;your class&gt;"</span> /&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="title">intent-filter</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">receiver</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="Service_Flag"><a href="#Service_Flag" class="headerlink" title="Service Flag"></a><strong>Service Flag</strong></h2><p>Set to <strong>START_STICKY</strong>, after around 5 sec of service being killed, it will restart, and pass Intent again.<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Override</span>  </span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">int</span> <span class="title">onStartCommand</span><span class="params">(Intent intent, <span class="keyword">int</span> flags, <span class="keyword">int</span> startId)</span> </span>&#123;  </span><br><span class="line">    flags = START_STICKY;  </span><br><span class="line">    <span class="function"><span class="keyword">return</span> <span class="keyword">super</span>.<span class="title">onStartCommand</span><span class="params">(intent, flags, startId)</span></span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="Use_startForeground"><a href="#Use_startForeground" class="headerlink" title="Use startForeground"></a><strong>Use startForeground</strong></h2><p>Use the <strong>startForeground(int, Notification)</strong> API to put the service in a foreground state, where the system considers it to be something the user is actively aware of and thus not a candidate for killing when low on memory. (It is still theoretically possible for the service to be killed under extreme memory pressure from the current foreground application, but in practice this should not be a concern.) [From <a href="http://developer.android.com/reference/android/app/Service.html" target="_blank" rel="external">official doc</a>]</p>
+<h2 id="Twin_Service"><a href="#Twin_Service" class="headerlink" title="Twin Service"></a><strong>Twin Service</strong></h2><p>Create 2 services to protect each other. they will restart the other service when it was killed.</p>
+<h2 id="Evil_Trick__5BHave_not_tried_it_yet_5D"><a href="#Evil_Trick__5BHave_not_tried_it_yet_5D" class="headerlink" title="Evil Trick [Have not tried it yet]"></a><strong>Evil Trick</strong> [Have not tried it yet]</h2><p>Remain 1px size page in the foreground to stay in a foreground state when application goes to background.</p>
+<h2 id="Disguise_App_as_system_app__5BAndroid_4-0_5D"><a href="#Disguise_App_as_system_app__5BAndroid_4-0_5D" class="headerlink" title="Disguise App as system app [Android 4.0]"></a><strong>Disguise App as system app</strong> [<em>Android 4.0</em>]</h2><p>Install your apk into <strong><em>/system/app</em></strong>.<br>Make your app as a system app by changing the proper permissions in a rooted device.</p>
+<h2 id="White_List"><a href="#White_List" class="headerlink" title="White List"></a><strong>White List</strong></h2><p>Contact manufacturer.</p>
+<h2 id="Listen_To_The_Broadcast"><a href="#Listen_To_The_Broadcast" class="headerlink" title="Listen To The Broadcast"></a><strong>Listen To The Broadcast</strong></h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">receiver</span> <span class="attribute">android:name</span>=<span class="value">"&lt;Name of your package&gt;.&lt;your class&gt;"</span> &gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">intent-filter</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">action</span> <span class="attribute">android:name</span>=<span class="value">"android.intent.action.BOOT_COMPLETED"</span> /&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">action</span> <span class="attribute">android:name</span>=<span class="value">"android.intent.action.USER_PRESENT"</span> /&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">action</span> <span class="attribute">android:name</span>=<span class="value">"android.intent.action.PACKAGE_RESTARTED"</span> /&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">action</span> <span class="attribute">android:name</span>=<span class="value">"&lt;Name of your package&gt;.&lt;your class&gt;"</span> /&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="title">intent-filter</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">receiver</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>BroadcastReceiver,<br><figure class="highlight openscad"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public void onReceive<span class="params">(Context context, Intent intent)</span> &#123;</span><br><span class="line">	<span class="keyword">if</span> <span class="params">(Intent.ACTION_BOOT_COMPLETED.equals<span class="params">(intent.getAction<span class="params">()</span>)</span>)</span> &#123;</span><br><span class="line">		<span class="comment">//start your sercice</span></span><br><span class="line">		startUploadService<span class="params">(context)</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> <span class="params">(Intent.ACTION_USER_PRESENT.equals<span class="params">(intent.getAction<span class="params">()</span>)</span>)</span> &#123;</span><br><span class="line">		<span class="comment">//...</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>You could use <strong>Intent.ACTION_TIME_TICK</strong> as better result, this one broadcasts in every minute, however it’s a system broadcast, you can’t config it in <em>manifest.xml</em>, register it in your <em>service</em> or <em>App extends application</em>,<br><figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">IntentFilter filter = newIntentFilter<span class="list">(<span class="keyword">Intent</span>.ACTION_TIME_TICK)</span><span class="comment">;</span></span><br><span class="line">MyBroadcastReceiver receiver = new MyBroadcastReceiver<span class="list">()</span><span class="comment">;</span></span><br><span class="line">registerReceiver<span class="list">(<span class="keyword">receiver</span>, filter)</span><span class="comment">;</span></span><br></pre></td></tr></table></figure></p>
 <p>In your receiver, let’s say it would look like <em>MyBroadcastReceiver extends BroadcastReceiver</em>, override <em>onReceive()</em> method,<br><figure class="highlight openscad"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">boolean isServiceRunning = <span class="literal">false</span>;</span><br><span class="line"><span class="keyword">if</span> <span class="params">(intent.getAction<span class="params">()</span>.equals<span class="params">(Intent.ACTION_TIME_TICK)</span>)</span> &#123;</span><br><span class="line">	ActivityManager manager = <span class="params">(ActivityManager)</span>ThisApp.getContext<span class="params">()</span>.getSystemService<span class="params">(Context.ACTIVITY_SERVICE)</span>;</span><br><span class="line">	<span class="keyword">for</span> <span class="params">(RunningServiceInfo service :manager.getRunningServices<span class="params">(Integer.MAX_VALUE)</span>)</span> &#123;</span><br><span class="line">		<span class="keyword">if</span><span class="params">(<span class="string">"so.xxxx.xxxxService"</span>.equals<span class="params">(service.service.getClassName<span class="params">()</span>)</span>)</span>&#123;</span><br><span class="line">			isServiceRunning = <span class="literal">true</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> <span class="params">(!isServiceRunning)</span> &#123;</span><br><span class="line">		Intent i = new Intent<span class="params">(context, xxxService.class)</span>;</span><br><span class="line">		context.startService<span class="params">(i)</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
@@ -616,9 +701,9 @@
 
       
         
-          <span itemprop="articleBody"><h3 id="HTML">HTML</h3><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="tag">img</span> src=<span class="string">"url"</span> style=<span class="string">"width:0px;height:0px;"</span>&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="Call_with_your_script">Call with your script</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span> <span class="attribute">src</span>=<span class="value">"url"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="Page_does_not_support_script?">Page does not support script?</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">noscript</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">iframe</span> <span class="attribute">src</span>=<span class="value">"url"</span> <span class="attribute">height</span>=<span class="value">"0"</span> <span class="attribute">width</span>=<span class="value">"0"</span> <span class="attribute">style</span>=<span class="value">"display:none;visibility:hidden"</span>&gt;</span><span class="tag">&lt;/<span class="title">iframe</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">noscript</span>&gt;</span></span><br></pre></td></tr></table></figure>
+          <span itemprop="articleBody"><h3 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h3><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="tag">img</span> src=<span class="string">"url"</span> style=<span class="string">"width:0px;height:0px;"</span>&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="Call_with_your_script"><a href="#Call_with_your_script" class="headerlink" title="Call with your script"></a>Call with your script</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span> <span class="attribute">src</span>=<span class="value">"url"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="Page_does_not_support_script_3F"><a href="#Page_does_not_support_script_3F" class="headerlink" title="Page does not support script?"></a>Page does not support script?</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">noscript</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">iframe</span> <span class="attribute">src</span>=<span class="value">"url"</span> <span class="attribute">height</span>=<span class="value">"0"</span> <span class="attribute">width</span>=<span class="value">"0"</span> <span class="attribute">style</span>=<span class="value">"display:none;visibility:hidden"</span>&gt;</span><span class="tag">&lt;/<span class="title">iframe</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">noscript</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p><strong>Improve stability :  Using combo “script + noscript”</strong></p>
 </span>
         
@@ -694,7 +779,7 @@
 <p>该函数的返回值,有如下四种：</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Surface<span class="class">.ROTATION_0</span>,</span><br><span class="line">Surface<span class="class">.ROTATION_90</span>,</span><br><span class="line">Surface<span class="class">.ROTATION_180</span>,</span><br><span class="line">Surface.ROTATION_270</span><br></pre></td></tr></table></figure>
 <p>其中,Surface.ROTATION_0 表示的是手机竖屏方向向上,后面几个以此为基准依次以顺时针90度递增.</p>
-<h3 id="Bug:_它只能一次旋转90度,_如果你突然一下子旋转180度,_onConfigurationChanged函数不会被调用-">Bug: 它只能一次旋转90度, 如果你突然一下子旋转180度, onConfigurationChanged函数不会被调用.</h3></li>
+<h3 id="Bug_3A__u5B83_u53EA_u80FD_u4E00_u6B21_u65CB_u8F6C90_u5EA6_2C__u5982_u679C_u4F60_u7A81_u7136_u4E00_u4E0B_u5B50_u65CB_u8F6C180_u5EA6_2C_onConfigurationChanged_u51FD_u6570_u4E0D_u4F1A_u88AB_u8C03_u7528"><a href="#Bug_3A__u5B83_u53EA_u80FD_u4E00_u6B21_u65CB_u8F6C90_u5EA6_2C__u5982_u679C_u4F60_u7A81_u7136_u4E00_u4E0B_u5B50_u65CB_u8F6C180_u5EA6_2C_onConfigurationChanged_u51FD_u6570_u4E0D_u4F1A_u88AB_u8C03_u7528" class="headerlink" title="Bug: 它只能一次旋转90度, 如果你突然一下子旋转180度, onConfigurationChanged函数不会被调用."></a>Bug: 它只能一次旋转90度, 如果你突然一下子旋转180度, onConfigurationChanged函数不会被调用.</h3></li>
 </ul>
 <p>实时判断屏幕旋转的每一个角度</p>
 <p>上面说的各种屏幕旋转角度的判断至多只能判断 0, 90 , 180, 270 四个角度,如果希望实时获取每一个角度的变化,则可以通过OrientationEventListener 来实现.</p>
@@ -792,72 +877,6 @@
 
 
     
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/09/06/Android-Better-Practice-Activity/" itemprop="url">
-                Android Better Practice : Activity
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          Posted on
-          <time itemprop="dateCreated" datetime="2015-09-06T01:47:45-07:00" content="2015-09-06">
-            2015-09-06
-          </time>
-        </span>
-
-        
-
-        
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h1 id="Knowing_info_of_current_activity">Knowing info of current activity</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BaseActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">final</span> String TAG = getClass().getSimpleName();</span><br><span class="line">	<span class="annotation">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">		Log.d(<span class="string">"BaseActivity"</span>,  TAG);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="Finish_all_activities">Finish all activities</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ActivityCollector</span> </span>&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> List&lt;Activity&gt; activities = <span class="keyword">new</span> ArrayList&lt;Activity&gt;();</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">addActivity</span><span class="params">(Activity activity)</span> </span>&#123;</span><br><span class="line">		activities.add(activity);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">removeActivity</span><span class="params">(Activity activity)</span> </span>&#123;</span><br><span class="line">		activities.remove(activity);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">finishAll</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">for</span> (Activity activity : activities) &#123;</span><br><span class="line">			<span class="keyword">if</span> (!activity.isFinishing()) &#123;</span><br><span class="line">				activity.finish();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BaseActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</span><br><span class="line">	<span class="annotation">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">		Log.d(TAG, <span class="string">"Msg"</span>);</span><br><span class="line">		ActivityCollector.addActivity(<span class="keyword">this</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="annotation">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>.onDestroy();</span><br><span class="line">		ActivityCollector.removeActivity(<span class="keyword">this</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThirdActivity</span> <span class="keyword">extends</span> <span class="title">BaseActivity</span> </span>&#123;</span><br><span class="line">	<span class="annotation">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">		Log.d(<span class="string">"ThirdActivity"</span>, <span class="string">"Task id is "</span> + getTaskId());</span><br><span class="line">		requestWindowFeature(Window.FEATURE_NO_TITLE);</span><br><span class="line">		setContentView(R.layout.third_layout);</span><br><span class="line">		Button button = (Button) findViewById(R.id.button);</span><br><span class="line">		button3.setOnClickListener(<span class="keyword">new</span> OnClickListener() &#123;</span><br><span class="line">			<span class="annotation">@Override</span></span><br><span class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</span><br><span class="line">				ActivityCollector.finishAll();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="Start_a_activity">Start a activity</h1><h3 id="Old_school">Old school</h3><figure class="highlight openscad"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Intent intent = new Intent<span class="params">(FirstActivity.this, SecondActivity.class)</span>;</span><br><span class="line">intent.putExtra<span class="params">(<span class="string">"param1"</span>, <span class="string">"data1"</span>)</span>;</span><br><span class="line">intent.putExtra<span class="params">(<span class="string">"param2"</span>, <span class="string">"data2"</span>)</span>;</span><br><span class="line">startActivity<span class="params">(intent)</span>;</span><br></pre></td></tr></table></figure>
-<h3 id="Do_this">Do this</h3><p>Define a method in the target activity<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">SecondActivity</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">BaseActivity</span> &#123;</span></span><br><span class="line">	public static void actionStart(<span class="type">Context</span> context, <span class="type">String</span> data1, <span class="type">String</span> data2) &#123;</span><br><span class="line">		<span class="type">Intent</span> intent = <span class="keyword">new</span> <span class="type">Intent</span>(context, <span class="type">SecondActivity</span>.<span class="keyword">class</span>);</span><br><span class="line">		intent.putExtra(<span class="string">"param1"</span>, data1);</span><br><span class="line">		intent.putExtra(<span class="string">"param2"</span>, data2);</span><br><span class="line">		context.startActivity(intent);</span><br><span class="line">	&#125;</span><br><span class="line">	……</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>Then<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">button.setOnClickListener(<span class="keyword">new</span> OnClickListener() &#123;</span><br><span class="line">	<span class="annotation">@Override</span></span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</span><br><span class="line">		SecondActivity.actionStart(FirstActivity.<span class="keyword">this</span>, <span class="string">"data1"</span>, <span class="string">"data2"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
-</span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -896,7 +915,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -949,8 +968,8 @@
     <footer id="footer" class="footer">
       <div class="footer-inner"> <div class="copyright" >
   
-  &copy; &nbsp; 
-  <span itemprop="copyrightYear">2015</span>
+  &copy; &nbsp;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
     <i class="icon-next-heart"></i>
   </span>
